@@ -6,7 +6,7 @@ type ZHALightLevel struct {
 	Dark       bool
 	Daylight   bool
 	LightLevel int32
-	Lux        int16
+	Lux        int32
 }
 
 // Fields implements the fielder interface and returns time series data for InfluxDB
