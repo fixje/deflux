@@ -15,5 +15,14 @@ func (z *ZHAOpenClose) Fields() map[string]interface{} {
 			"lowbattery": z.Lowbattery,
 			"tampered":   z.Tampered,
 			"open":       z.Open,
+			"open_int":   boolToInt(z.Open),
 		})
+}
+
+func boolToInt(b bool) int {
+	if b {
+		return 1
+	} else {
+		return 0
+	}
 }
