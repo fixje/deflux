@@ -327,6 +327,15 @@ You can cross-compile for Raspberry Pi 4 by setting `GOARCH` and `GOARM`:
 GOOS=linux GOARCH=arm GOARM=7 go build
 ```
 
+### Integration Tests
+
+The project includes integration tests (marked by [build tags](https://pkg.go.dev/go/build)) which are not run automatically. They require an instance of
+deCONZ and InfluxDB running on `localhost`. Exceute all tests, including integration tests with
+
+```
+go test --tags=integration_test ./...
+```
+
 
 ## Resources
 
