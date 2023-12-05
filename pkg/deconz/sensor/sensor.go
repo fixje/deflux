@@ -46,6 +46,7 @@ type Sensor struct {
 type Config struct {
 	// Battery state in percent; not present for all sensors
 	Battery uint32 `json:"battery"`
+	HeatSetpoint *int `json:"heatsetpoint"`
 }
 
 // State contains properties that are provided by all sensors
@@ -109,6 +110,14 @@ func (s *Sensor) Timeseries() (map[string]string, map[string]interface{}, error)
 	if _, ok := fields["battery"]; !ok {
 		fields["battery"] = int(s.Config.Battery)
 	}
+
+        // special cases
+        switch s.Type {
+
+                case "ZHAThermostat":
+                        fields["heatsetpoint"] = float64(*s.Config.HeatSetpoint) / 100
+
+        }
 
 	return map[string]string{
 			"name":   s.Name,
@@ -210,6 +219,12 @@ func DecodeSensorState(rawState json.RawMessage, sensorType string) (interface{}
 		var s ZHAWater
 		err = json.Unmarshal(rawState, &s)
 		return &s, err
+
+	case "ZHAThermostat":
+		var s ZHAThermostat
+		err = json.Unmarshal(rawState, &s)
+		return &s, err
+
 	}
 
 	return nil, fmt.Errorf("%s is not a known sensor type", sensorType)
