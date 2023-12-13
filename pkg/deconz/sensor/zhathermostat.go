@@ -3,8 +3,8 @@ package sensor
 // ZHAThermostat represents the state of a thermostat
 type ZHAThermostat struct {
 	State
-	Temperature int
-	Valve int
+	Temperature	int
+	Valve		int
 }
 
 // Fields implements the fielder interface and returns time series data for InfluxDB

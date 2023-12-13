@@ -48,6 +48,9 @@ func (s *SensorEvent) Timeseries() (map[string]string, map[string]interface{}, e
 
                 case "ZHAThermostat":
                         fields["heatsetpoint"] = float64(*s.Config.HeatSetpoint) / 100
+                        fields["mode"] = *s.Config.Mode
+                        fields["offset"] = float64(*s.Config.Offset) / 100
+
 
         }
 
