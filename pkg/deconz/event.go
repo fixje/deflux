@@ -43,6 +43,19 @@ func (s *SensorEvent) Timeseries() (map[string]string, map[string]interface{}, e
 		fields["battery"] = int(s.Sensor.Config.Battery)
 	}
 
+	// special cases
+        switch s.Type {
+
+                case "ZHAThermostat":
+                        fields["heatsetpoint"] = float64(*s.Config.HeatSetpoint) / 100
+                        fields["mode"] = *s.Config.Mode
+                        fields["offset"] = float64(*s.Config.Offset) / 100
+			fields["externalsensortemp"] = float64(*s.Config.ExternalSensorTemp) / 100
+
+
+        }
+
+
 	return map[string]string{
 			"name":   s.Name,
 			"type":   s.Sensor.Type,
