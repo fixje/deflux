@@ -50,6 +50,7 @@ func (s *SensorEvent) Timeseries() (map[string]string, map[string]interface{}, e
                         fields["heatsetpoint"] = float64(*s.Config.HeatSetpoint) / 100
                         fields["mode"] = *s.Config.Mode
                         fields["offset"] = float64(*s.Config.Offset) / 100
+			fields["externalsensortemp"] = float64(*s.Config.ExternalSensorTemp) / 100
 
 
         }

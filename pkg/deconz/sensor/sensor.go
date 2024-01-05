@@ -45,10 +45,11 @@ type Sensor struct {
 // Currently, it holds only the battery state.
 type Config struct {
 	// Battery state in percent; not present for all sensors
-	Battery		uint32	`json:"battery"`
-	HeatSetpoint	*int	`json:"heatsetpoint"`
-	Mode		*string	`json:"mode"`
-	Offset		*int	`json:"offset"`
+	Battery			uint32	`json:"battery"`
+	HeatSetpoint		*int	`json:"heatsetpoint"`
+	Mode			*string	`json:"mode"`
+	Offset			*int	`json:"offset"`
+	ExternalSensorTemp	*int	`json:"externalsensortemp"`
 }
 
 // State contains properties that are provided by all sensors
@@ -120,6 +121,7 @@ func (s *Sensor) Timeseries() (map[string]string, map[string]interface{}, error)
 			fields["heatsetpoint"] = float64(*s.Config.HeatSetpoint) / 100
 			fields["mode"] = *s.Config.Mode
 			fields["offset"] = float64(*s.Config.Offset) / 100
+			fields["externalsensortemp"] = float64(*s.Config.ExternalSensorTemp) / 100
 
         }
 
